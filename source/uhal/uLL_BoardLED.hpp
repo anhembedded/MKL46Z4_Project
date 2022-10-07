@@ -17,11 +17,19 @@
 #include "CMSIS\MKL46Z4.h"
 #include "CMSIS\board.h"
 
+static auto greenLedInit() -> void;
+static auto redLedInit() -> void;
+
 namespace OnBoardLED
 {
-    auto init() -> void;
+    __STATIC_INLINE auto init() -> void
+    {
+        
+    }
     
 
 } // namespace OnBoardLED
+
+
 
 #endif // MKL46Z4_PROJECT_SOURCE_UHAL_ULL_BOARDLED_HPP
