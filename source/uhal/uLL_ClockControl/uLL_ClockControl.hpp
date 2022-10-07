@@ -33,11 +33,14 @@ namespace clockControl
   namespace coreClock
   {
 
-  } // namespace coreClock
+  } /* namespace coreClock */
   namespace systemClock
   {
     __STATIC_FORCEINLINE void enableClkPortA();
-    __STATIC_FORCEINLINE void enableClkPortC();
+    __STATIC_FORCEINLINE void enableClkPortC()
+    {
+      SET_BIT(SIM->SCGC5, SIM_SCGC5_PORTC_SHIFT);
+    }
     __STATIC_FORCEINLINE void enableClkPortD()
     {
       SET_BIT(SIM->SCGC5, SIM_SCGC5_PORTD_SHIFT);
