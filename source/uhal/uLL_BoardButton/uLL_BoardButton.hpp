@@ -26,7 +26,8 @@ extern "C"
  ************************************/
 #include "bitManipulation.hpp"
 
-namespace uLL_onBoardButton
+
+namespace OnBoardButton
 {
     void init();
     namespace SW1
@@ -34,7 +35,7 @@ namespace uLL_onBoardButton
         __STATIC_FORCEINLINE bool isPress()
         {
             decltype(isPress()) temp = 0;
-            temp = IS_BIT_SET(BOARD_SW1_GPIO->PDIR, BOARD_SW1_GPIO_PIN);
+            temp = !IS_BIT_SET(BOARD_SW1_GPIO->PDIR, BOARD_SW1_GPIO_PIN);
             return (temp);
         }
     } /* namespace SW1 */
@@ -44,11 +45,13 @@ namespace uLL_onBoardButton
         __STATIC_FORCEINLINE bool isPress()
         {
             decltype(isPress()) temp = 0;
-            temp = IS_BIT_SET(BOARD_SW3_GPIO->PDIR, BOARD_SW3_GPIO_PIN);
+            temp = !IS_BIT_SET(BOARD_SW3_GPIO->PDIR, BOARD_SW3_GPIO_PIN);
             return (temp);
         }
     } /* namespace SW3 */
 
-} // namespace onBoardButton
+}
+
+
 
 #endif // MKL46Z4_PROJECT_SOURCE_UHAL_ULL_BOARDBUTTON_ULL_BOARDBUTTON_HPP

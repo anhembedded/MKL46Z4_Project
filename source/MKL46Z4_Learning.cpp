@@ -15,9 +15,21 @@ extern "C"
 #include "board.h"
 #include "MKL46Z4.h"
 }
+
 #include "uhal/uLL_BoaedLed/uLL_BoardLED.hpp"
 #include "uhal/uLL_ClockControl/uLL_ClockControl.hpp"
-#include "uhal/uLL_BoardButton/uLL_BoardButton.cpp"
+#include "uhal/uLL_BoardButton/uLL_BoardButton.hpp"
+volatile uint32_t msTicks = 123; /* Variable to store millisecond ticks */
+
+extern "C"
+{
+void SysTick_Handler(void)
+{
+    /* SysTick interrupt Handler. */
+    msTicks++; /* See startup file startup_LPC17xx.s for SysTick vector */
+    NVIC_ClearPendingIRQ(SysTick_IRQn);
+}
+}
 
 uint32_t watchVar = 0;
 
@@ -26,17 +38,22 @@ int main(void)
     clockControl::systemClock::enableClkPortD();
     clockControl::systemClock::enableClkPortE();
     OnBoardLED::init();
-    uLL_onBoardButton::init();
-    OnBoardLED::ledRed::on();
-    OnBoardLED::ledRed::off();
+    OnBoardButton::init();
+
+    SysTick_Config(SystemCoreClock / 1000);
+
     while (true)
     {
-        if (uLL_onBoardButton::SW1::isPress())
+        if (OnBoardButton::SW1::isPress())
         {
+            OnBoardLED::ledRed::off();
             watchVar = 1;
         }
-        else
+
+        if (!OnBoardButton::SW1::isPress())
         {
+
+            OnBoardLED::ledRed::on();
             watchVar = 0;
         }
     }
