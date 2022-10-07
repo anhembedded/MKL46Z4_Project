@@ -1,43 +1,33 @@
-/*
- * Copyright 2016-2022 NXP
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
- *
- * o Redistributions of source code must retain the above copyright notice, this list
- *   of conditions and the following disclaimer.
- *
- * o Redistributions in binary form must reproduce the above copyright notice, this
- *   list of conditions and the following disclaimer in the documentation and/or
- *   other materials provided with the distribution.
- *
- * o Neither the name of NXP Semiconductor, Inc. nor the names of its
- *   contributors may be used to endorse or promote products derived from this
- *   software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
- * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+/* ********************************************************************************************************* */
+/*                                                                                                           */
+/*                                                              :::::::::: ::::::::   :::::::: :::::::::::   */
+/*   MKL46Z4_Learning.cpp                                      :+:       :+:    :+: :+:    :+:    :+:        */
+/*                                                            +:+       +:+        +:+           +:+         */
+/*   By: Nathan Embedded <Anh.Embedded@gmail.com>            +#++:++#  +#++:++#++ :#:           +#+          */
+/*                                                          +#+              +#+ +#+   +#+#    +#+           */
+/*   Created: 2022/10/07 18:35:08 by Nathan Embed          #+#       #+#    #+# #+#    #+#    #+#            */
+/*   Updated: 2022/10/07 18:35:08 by Nathan Embed         ########## ########   ######## ###########         */
+/*                                                                                                           */
+/* ********************************************************************************************************* */
 
-/**
- * @file    MKL46Z4_Learning.cpp
- * @brief   Application entry point.
- */
-
+extern "C"
+{
 #include "board.h"
 #include "MKL46Z4.h"
+}
+#include "uhal/uLL_BoaedLed/uLL_BoardLED.hpp"
+#include "uhal/uLL_ClockControl/uLL_ClockControl.hpp"
 
 int main(void)
 {
+    clockControl::systemClock::enableClkPortD();
+    clockControl::systemClock::enableClkPortE();
+    OnBoardLED::init();
+    OnBoardLED::ledRed::on();
+    OnBoardLED::ledRed::off();
+    while (true)
+    {
+    }
 
-    return 0;
+    return (0);
 }

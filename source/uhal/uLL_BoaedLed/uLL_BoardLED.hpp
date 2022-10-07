@@ -32,15 +32,15 @@ namespace OnBoardLED
 
     namespace ledRed
     {
-        __STATIC_FORCEINLINE auto on() -> void
+        __STATIC_FORCEINLINE void off()
         {
             SET_BIT(BOARD_LED_RED_GPIO->PSOR, BOARD_LED_RED_GPIO_PIN);
         }
-        __STATIC_FORCEINLINE auto off() -> void
+        __STATIC_FORCEINLINE void on()
         {
             SET_BIT(BOARD_LED_RED_GPIO->PCOR, BOARD_LED_RED_GPIO_PIN);
         }
-        __STATIC_FORCEINLINE auto toggle() -> void
+        __STATIC_FORCEINLINE void toggle()
         {
             SET_BIT(BOARD_LED_RED_GPIO->PTOR, BOARD_LED_RED_GPIO_PIN);
         }
@@ -48,9 +48,9 @@ namespace OnBoardLED
 
     namespace ledGreen
     {
-        __STATIC_FORCEINLINE auto on() -> void;
-        __STATIC_FORCEINLINE auto off() -> void;
-        __STATIC_FORCEINLINE auto toggle() -> void;
+        __STATIC_FORCEINLINE void on();
+        __STATIC_FORCEINLINE void off();
+        __STATIC_FORCEINLINE void toggle();
     }
 } // namespace OnBoardLED
 

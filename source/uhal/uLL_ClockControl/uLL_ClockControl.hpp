@@ -20,6 +20,7 @@ extern "C"
 {
 #include "CMSIS/cmsis_compiler.h"
 #include "board/board.h"
+#include "CMSIS/MKL46Z4.h"
 }
 /*--------------------------------------------------------------------
   For including Cpp's header files
@@ -27,27 +28,33 @@ extern "C"
 #include "bitManipulation.hpp"
 #include <cstdint>
 
-namespace iLL_clockControl
+namespace clockControl
 {
-    namespace coreClock
-    {
+  namespace coreClock
+  {
 
-    } // namespace coreClock
-    namespace systemClock
+  } // namespace coreClock
+  namespace systemClock
+  {
+    __STATIC_FORCEINLINE void enableClkPortA();
+    __STATIC_FORCEINLINE void enableClkPortC();
+    __STATIC_FORCEINLINE void enableClkPortD()
     {
-      __STATIC_FORCEINLINE void enableClkPortA();
-      __STATIC_FORCEINLINE void enableClkPortC();
-      __STATIC_FORCEINLINE void enableClkPortD();
-      __STATIC_FORCEINLINE void enableClkPortE();
-      __STATIC_FORCEINLINE void enableClkPortF();
+      SET_BIT(SIM->SCGC5, SIM_SCGC5_PORTD_SHIFT);
+    }
+    __STATIC_FORCEINLINE void enableClkPortE()
+    {
+      SET_BIT(SIM->SCGC5, SIM_SCGC5_PORTE_SHIFT);
+    }
+    __STATIC_FORCEINLINE void enableClkPortF();
 #ifdef GPIOG
-      __STATIC_FORCEINLINE void enableClkPortG();
+    __STATIC_FORCEINLINE void enableClkPortG();
 #endif
-    } // namespace systemClock
-    namespace platformClock
-    {
-      __STATIC_FORCEINLINE void enableClkNVIC();
-    } // namespace platformClock
+  } /* namespace systemClock */
+  namespace platformClock
+  {
+    __STATIC_FORCEINLINE void enableClkNVIC();
+  } // namespace platformClock
 
 } // namespace iLL_clockControl
 
