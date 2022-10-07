@@ -14,23 +14,44 @@
 #define MKL46Z4_PROJECT_SOURCE_UHAL_ULL_BOARDLED_HPP
 
 #include <cstdint>
+
+extern "C"
+{
 #include "CMSIS\MKL46Z4.h"
-#include "CMSIS\board.h"
+#include "board\board.h"
+}
+#include "bitManipulation.hpp"
 
 static auto greenLedInit() -> void;
 static auto redLedInit() -> void;
 
 namespace OnBoardLED
 {
-    __STATIC_INLINE auto init() -> void
+
+    auto init() -> void;
+
+    namespace ledRed
     {
-        
+        __STATIC_FORCEINLINE auto on() -> void
+        {
+            SET_BIT(BOARD_LED_RED_GPIO->PSOR, BOARD_LED_RED_GPIO_PIN);
+        }
+        __STATIC_FORCEINLINE auto off() -> void
+        {
+            SET_BIT(BOARD_LED_RED_GPIO->PCOR, BOARD_LED_RED_GPIO_PIN);
+        }
+        __STATIC_FORCEINLINE auto toggle() -> void
+        {
+            SET_BIT(BOARD_LED_RED_GPIO->PTOR, BOARD_LED_RED_GPIO_PIN);
+        }
+    } // ledRed
+
+    namespace ledGreen
+    {
+        __STATIC_FORCEINLINE auto on() -> void;
+        __STATIC_FORCEINLINE auto off() -> void;
+        __STATIC_FORCEINLINE auto toggle() -> void;
     }
-    
-
 } // namespace OnBoardLED
-
-
-
 
 #endif // MKL46Z4_PROJECT_SOURCE_UHAL_ULL_BOARDLED_HPP

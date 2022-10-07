@@ -35,18 +35,18 @@ namespace iLL_clockControl
     } // namespace coreClock
     namespace systemClock
     {
-        __STATIC_FORCEINLINE auto enableClkPortA() -> void;
-        __STATIC_FORCEINLINE auto enableClkPortC() -> void;
-        __STATIC_FORCEINLINE auto enableClkPortD() -> void;
-        __STATIC_FORCEINLINE auto enableClkPortE() -> void;
-        __STATIC_FORCEINLINE auto enableClkPortF() -> void;
+      __STATIC_FORCEINLINE void enableClkPortA();
+      __STATIC_FORCEINLINE void enableClkPortC();
+      __STATIC_FORCEINLINE void enableClkPortD();
+      __STATIC_FORCEINLINE void enableClkPortE();
+      __STATIC_FORCEINLINE void enableClkPortF();
 #ifdef GPIOG
-        __STATIC_FORCEINLINE auto enableClkPortG() -> void;
+      __STATIC_FORCEINLINE void enableClkPortG();
 #endif
     } // namespace systemClock
     namespace platformClock
     {
-
+      __STATIC_FORCEINLINE void enableClkNVIC();
     } // namespace platformClock
 
 } // namespace iLL_clockControl

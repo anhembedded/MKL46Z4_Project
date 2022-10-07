@@ -1,17 +1,17 @@
 /* ********************************************************************************************************* */
 /*                                                                                                           */
 /*                                                              :::::::::: ::::::::   :::::::: :::::::::::   */
-/*   uLL_ClockControl.hpp                                      :+:       :+:    :+: :+:    :+:    :+:        */
+/*   uLL_NVIC.hpp                                              :+:       :+:    :+: :+:    :+:    :+:        */
 /*                                                            +:+       +:+        +:+           +:+         */
 /*   By: Nathan Embedded <Anh.Embedded@gmail.com>            +#++:++#  +#++:++#++ :#:           +#+          */
 /*                                                          +#+              +#+ +#+   +#+#    +#+           */
-/*   Created: 2022/10/07 10:29:20 by Nathan Embed          #+#       #+#    #+# #+#    #+#    #+#            */
-/*   Updated: 2022/10/07 10:29:20 by Nathan Embed         ########## ########   ######## ###########         */
+/*   Created: 2022/10/07 13:55:24 by Nathan Embed          #+#       #+#    #+# #+#    #+#    #+#            */
+/*   Updated: 2022/10/07 13:55:24 by Nathan Embed         ########## ########   ######## ###########         */
 /*                                                                                                           */
 /* ********************************************************************************************************* */
 
-#ifndef MKL46Z4_PROJECT_SOURCE_UHAL_ULL_CLOCKCONTROL_HPP
-#define MKL46Z4_PROJECT_SOURCE_UHAL_ULL_CLOCKCONTROL_HPP
+#ifndef MKL46Z4_PROJECT_SOURCE_UHAL_ULL_NVIC_ULL_NVIC_HPP
+#define MKL46Z4_PROJECT_SOURCE_UHAL_ULL_NVIC_ULL_NVIC_HPP
 
 /*--------------------------------------------------------------------
   For including C's header files
@@ -27,28 +27,22 @@ extern "C"
 #include "bitManipulation.hpp"
 #include <cstdint>
 
-namespace iLL_clockControl
+namespace uLL_NVIC
 {
-    namespace coreClock
+    namespace SW1
     {
-
-    } // namespace coreClock
-    namespace systemClock
+        __STATIC_FORCEINLINE void setRriority(uint32_t u32Priority);
+        __STATIC_FORCEINLINE void clearMask();
+        __STATIC_FORCEINLINE void clearPendingBit();
+        __STATIC_FORCEINLINE bool isFlagSet();
+    }
+    namespace SW3
     {
-        __STATIC_FORCEINLINE auto enableClkPortA() -> void;
-        __STATIC_FORCEINLINE auto enableClkPortC() -> void;
-        __STATIC_FORCEINLINE auto enableClkPortD() -> void;
-        __STATIC_FORCEINLINE auto enableClkPortE() -> void;
-        __STATIC_FORCEINLINE auto enableClkPortF() -> void;
-#ifdef GPIOG
-        __STATIC_FORCEINLINE auto enableClkPortG() -> void;
-#endif
-    } // namespace systemClock
-    namespace platformClock
-    {
+        __STATIC_FORCEINLINE void setRriority(uint32_t u32Priority);
+        __STATIC_FORCEINLINE void clearMask();
+        __STATIC_FORCEINLINE void clearPendingBit();
+        __STATIC_FORCEINLINE bool isFlagSet();
+    }
+} /* namespace uLL_NVIC */
 
-    } // namespace platformClock
-
-} // namespace iLL_clockControl
-
-#endif // MKL46Z4_PROJECT_SOURCE_UHAL_ULL_CLOCKCONTROL_HPP
+#endif // MKL46Z4_PROJECT_SOURCE_UHAL_ULL_NVIC_ULL_NVIC_HPP
