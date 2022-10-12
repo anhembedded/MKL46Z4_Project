@@ -26,19 +26,8 @@ extern "C"
     void SysTick_Handler(void)
     {
         /* SysTick interrupt Handler. */
-        umaxTickCounter++; /* See startup file startup_LPC17xx.s for SysTick vector */
+        msTicks++; /* See startup file startup_LPC17xx.s for SysTick vector */
         NVIC_ClearPendingIRQ(SysTick_IRQn);
-    }
-}
-
-void delayHandler(uint32_t time, void (*HandleF)(void))
-{
-    uintmax_t now = umaxTickCounter;
-
-    uint32_t totalDelay = now + time;
-    while (umaxTickCounter < totalDelay)
-    {
-        HandleF();
     }
 }
 
@@ -69,6 +58,6 @@ __NO_RETURN int main(void)
             watchVar = 0;
         }
     }
-
+    // NEW OnClassChanged;git
     return (0);
 }
