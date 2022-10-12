@@ -23,12 +23,12 @@ volatile uint32_t msTicks = 123; /* Variable to store millisecond ticks */
 
 extern "C"
 {
-void SysTick_Handler(void)
-{
-    /* SysTick interrupt Handler. */
-    msTicks++; /* See startup file startup_LPC17xx.s for SysTick vector */
-    NVIC_ClearPendingIRQ(SysTick_IRQn);
-}
+    void SysTick_Handler(void)
+    {
+        /* SysTick interrupt Handler. */
+        msTicks++; /* See startup file startup_LPC17xx.s for SysTick vector */
+        NVIC_ClearPendingIRQ(SysTick_IRQn);
+    }
 }
 
 uint32_t watchVar = 0;
@@ -57,6 +57,6 @@ int main(void)
             watchVar = 0;
         }
     }
-
+    // NEW OnClassChanged;git
     return (0);
 }
