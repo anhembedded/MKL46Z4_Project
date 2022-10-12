@@ -56,9 +56,12 @@ namespace clockControl
   } /* namespace systemClock */
   namespace platformClock
   {
-    __STATIC_FORCEINLINE void enableClkNVIC();
-  } // namespace platformClock
+    __STATIC_FORCEINLINE void enableClkNVIC()
+    {
+      __NOP();
+    }
+  } /*  namespace platformClock */
 
-} // namespace iLL_clockControl
+} /* namespace iLL_clockControl */
 
 #endif // MKL46Z4_PROJECT_SOURCE_UHAL_ULL_CLOCKCONTROL_HPP
