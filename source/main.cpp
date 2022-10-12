@@ -20,43 +20,44 @@ extern "C"
 #include "uhal/uLL_ClockControl/uLL_ClockControl.hpp"
 #include "uhal/uLL_BoardButton/uLL_BoardButton.hpp"
 volatile uint32_t msTicks = 123; /* Variable to store millisecond ticks */
-
+uintmax_t umaxTickCounter;
 extern "C"
 {
-void SysTick_Handler(void)
-{
-    /* SysTick interrupt Handler. */
-    msTicks++; /* See startup file startup_LPC17xx.s for SysTick vector */
-    NVIC_ClearPendingIRQ(SysTick_IRQn);
-}
+    void SysTick_Handler(void)
+    {
+        /* SysTick interrupt Handler. */
+        msTicks++; /* See startup file startup_LPC17xx.s for SysTick vector */
+        NVIC_ClearPendingIRQ(SysTick_IRQn);
+    }
 }
 
 uint32_t watchVar = 0;
 
-int main(void)
+__NO_RETURN int main(void)
 {
     clockControl::systemClock::enableClkPortD();
     clockControl::systemClock::enableClkPortE();
     OnBoardLED::init();
-    OnBoardButton::init();
+    OnBoardButton::pollingMethod::init();
+    SystemInit();
 
     SysTick_Config(SystemCoreClock / 1000);
 
     while (true)
     {
-        if (OnBoardButton::SW1::isPress())
+        if (OnBoardButton::pollingMethod::SW1::isPress())
         {
             OnBoardLED::ledRed::off();
             watchVar = 1;
         }
 
-        if (!OnBoardButton::SW1::isPress())
+        if (!OnBoardButton::pollingMethod::SW1::isPress())
         {
 
             OnBoardLED::ledRed::on();
             watchVar = 0;
         }
     }
-
+    // NEW OnClassChanged;git
     return (0);
 }
